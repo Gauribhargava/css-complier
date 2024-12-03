@@ -1,0 +1,331 @@
+// Variables
+$primary-color: #111111;
+$secondary-color: #787878;
+$hover-color: #999999;
+$link-color: #324360;
+$link-hover-color: #35c4ce;
+$footer-bg-color: #eaf2ff;
+$footer-text-color: #989898;
+$font-family-primary: 'Josefin Sans', sans-serif;
+$font-family-secondary: 'Quando', serif;
+$container-width-sm: 94%;
+$container-width-lg: 90%;
+$heading-font-weight: 400;
+$footer-padding: 20px 0;
+$footer-social-font-size: 14px;
+$footer-social-margin: 5px;
+$main-padding: 20px;
+$article-padding: 10px;
+$image-height: 300px;
+
+// Mixins
+@mixin container($width) {
+  width: $width;
+  margin: 0 auto;
+}
+
+@mixin transition($duration) {
+  transition: $duration;
+}
+
+// General Styles
+body {
+  font-family: $font-family-secondary;
+  font-size: 14px;
+  color: $secondary-color;
+//   padding: $main-padding;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+p {
+  margin-bottom: 15px;
+  line-height: 1.4em;
+}
+
+a {
+  font-weight: 400;
+  text-decoration: none;
+  color: $primary-color;
+  @include transition(0.2s);
+}
+
+a:hover {
+  color: $hover-color;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-family: $font-family-primary;
+  font-weight: $heading-font-weight;
+  line-height: 1.2em;
+  word-wrap: break-word;
+  color: $primary-color;
+}
+
+h1 {
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 28px;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+h4 {
+  font-size: 20px;
+}
+
+h5 {
+  font-size: 18px;
+}
+
+h6 {
+  font-size: 16px;
+}
+
+// Container
+.container {
+  @include container($container-width-sm);
+}
+
+// Header and Navigation
+header {
+  font-family: $font-family-primary;
+}
+
+header nav ul {
+  display: none;
+}
+
+.top-logo {
+  width: 150px;
+  margin: 10px auto 20px;
+}
+
+// Post Styles
+article {
+  margin-bottom: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: $article-padding;
+}
+
+.image-part {
+  flex: 1;
+  margin-bottom: 0;
+  max-height: $image-height;
+  overflow: hidden;
+}
+
+.image-part img {
+  height: 100%;
+  object-fit: cover;
+  @include transition(2.5s ease-in-out);
+}
+
+.image-part img:hover {
+  transform: scale(1.2, 1.2);
+}
+
+.content-part {
+  flex: 2;
+  padding-left: 20px;
+}
+
+.post-title {
+  margin-top: 0;
+}
+
+.post-title a {
+  color: $link-color;
+  text-transform: uppercase;
+  font-size: 22px;
+  font-weight: 900;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  line-height: 1.3em;
+  @include transition(0.3s ease);
+}
+
+.post-title a:hover {
+  color: $link-hover-color;
+}
+
+// Footer Styles
+footer {
+  padding: $footer-padding;
+  text-align: center;
+  background: $footer-bg-color;
+  color: $footer-text-color;
+  height: 200px;
+}
+
+#footer a {
+  color: $footer-text-color;
+}
+
+#footer a:hover {
+  color: $primary-color;
+}
+
+.footer-logo {
+  width: 150px;
+  margin: 10px auto;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.footer-social-links {
+  padding: 10px 0;
+  line-height: 1.6em;
+}
+
+.footer-social-links a {
+  margin: 0 $footer-social-margin;
+  font-size: $footer-social-font-size;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.footer-social-links a span {
+  display: none;
+}
+
+#footer-copyright {
+  padding: 10px 0;
+  font-size: 10px;
+  color: $footer-text-color;
+}
+
+// Media Queries for Larger Screens
+@media only screen and (min-width: 650px) {
+  .container {
+    @include container($container-width-lg);
+  }
+
+  header nav {
+    max-width: 1170px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+  }
+
+  header nav ul {
+    display: flex;
+  }
+
+  header nav li {
+    margin: 0 10px;
+    position: relative;
+    line-height: 24px;
+  }
+
+  header nav a {
+    font-family: $font-family-primary;
+    color: $link-color;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 900;
+  }
+
+  header nav a:hover {
+    color: $link-hover-color;
+  }
+
+  header nav li.menu-item-has-children > a::after {
+    margin-left: 5px;
+    font-family: 'FontAwesome';
+    font-size: 13px;
+    color: $link-color;
+    content: '\f078';
+  }
+
+  .current-menu-item a {
+    border-bottom: 2px solid $link-color;
+  }
+
+  // Sub nav
+  header nav ul ul {
+    visibility: hidden;
+    opacity: 0;
+    display: block;
+    position: absolute;
+    z-index: 9999;
+    left: 0;
+    background: #f0f0f0;
+    @include transition(0.2s ease-out);
+  }
+
+  header nav ul li:hover ul {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  header nav ul ul li {
+    border-top: 1px solid #e9e9e9;
+    margin: 0;
+  }
+
+  header nav ul ul a {
+    display: block;
+    color: $primary-color;
+    min-width: 175px;
+    margin: 0;
+    padding: 15px 10px;
+    line-height: 1.3em;
+    letter-spacing: 1px;
+    @include transition(0.35s);
+  }
+
+  header nav ul ul a:hover {
+    background: #ffffff;
+    color: $primary-color;
+  }
+
+  // Posts
+  article {
+    display: flex;
+  }
+
+  .image-part {
+    flex: 1;
+    overflow: hidden;
+    margin-bottom: 0;
+    max-height: $image-height;
+  }
+
+  .image-part img:hover {
+    transform: scale(1.2, 1.2);
+  }
+
+  .content-part {
+    flex: 2;
+    padding-left: 30px;
+  }
+
+  // Footer
+  .footer-social-links a {
+    margin: 0 20px;
+  }
+
+  .footer-social-links i {
+    margin-right: 5px;
+  }
+
+  .footer-social-links a span {
+    display: inline;
+    font-size: 11px;
+  }
+}
